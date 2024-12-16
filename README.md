@@ -4,10 +4,12 @@
 
 A modern, interactive implementation of the classic Simon Says memory game, featuring a responsive graphical user interface, dynamic sound effects, and engaging voice guidance.
 
+---
+
 ## Key Features
 
 - **Interactive Gameplay**: Responsive GUI with a classic Simon Says game mechanic
-- **Dynamic Audio Experience**: 
+- **Dynamic Audio Experience**:
   - Unique tones for each game button
   - Voice-guided color announcements
 - **Advanced Game Mechanics**:
@@ -17,6 +19,23 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 - **Optimized User Experience**:
   - Clean, automated sound file management
   - Intuitive user interface
+
+---
+
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [File Structure](#file-structure)
+- [How It Works](#how-it-works)
+- [Dependencies](#dependencies)
+- [Future Improvements](#future-improvements)
+- [Screenshot](#screenshot)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
 
 ## Prerequisites
 
@@ -30,6 +49,8 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 - Python
 - pip
 - (Recommended) Virtual environment
+
+---
 
 ## Installation
 
@@ -60,25 +81,31 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Getting Started
+---
 
-### Prepare Sound Files
+## Usage
+
+1. Prepare Sound Files
 
 ```bash
 python sound_gen.py
 ```
 
-### Launch the Game
+This script creates `.wav` files for the game's tones and cleans up temporary voice files after combining them.
+
+2. Launch the Game
 
 ```bash
 python main.py
 ```
 
-## Project Architecture
+3. Enjoy the game! Follow the sequence of flashing buttons and try to beat your high score.
 
-### File Structure
+---
 
-```
+## File Structure
+
+```plaintext
 python-simon-says/
 │
 ├── main.py              # Primary game implementation
@@ -90,20 +117,23 @@ python-simon-says/
 └── README.md            # Project documentation
 ```
 
-## Technical Details
+---
 
-### Sound Generation
+## How It Works
 
-- Utilizes `pydub` for tone generation
-- Leverages `pyttsx3` for voice synthesis
-- Automatic cleanup of temporary audio files
+### 1. **Sound Generation** (`sound_gen.py`):
+- Generates tones for the four colors using `pydub`.
+- Leverages `pyttsx3` for voice synthesis.
+- Combines tones and voice prompts into `.wav` files.
+- Cleans up temporary voice files automatically.
 
-### Game Mechanics
+### 2. **Simon Says Game** (`main.py`):
+- Tkinter-based graphical interface.
+- Dynamic difficulty progression.
+- Real-time score tracking.
+- High score preservation.
 
-- Tkinter-based graphical interface
-- Dynamic difficulty progression
-- Real-time score tracking
-- High score preservation
+---
 
 ## Dependencies
 
@@ -116,14 +146,24 @@ python-simon-says/
 | pyttsx3       | >=2.98,<3.0   | Text-to-speech synthesis       |
 | pywin32       | >=308,<309    | Windows Python extensions      |
 
-## Roadmap
+Install them using the provided `requirements.txt` file.
 
-### Upcoming Enhancements
+---
 
-- [ ] Implement visual button press effects
-- [ ] Develop global leaderboard system
-- [ ] Create custom sound theme support
-- [ ] Cross-platform packaging solutions
+## Future Improvements
+
+- Add visual effects for button presses.
+- Implement a leaderboard system for global high scores.
+- Create custom sound theme support.
+- Provide cross-platform packaging solutions.
+
+---
+
+## Screenshot
+
+![Screenshot of the game in action](screenshot.png)
+
+---
 
 ## Contributing
 
@@ -135,9 +175,13 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+---
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+---
 
 ## Contact
 
@@ -146,3 +190,4 @@ Project Link: [https://github.com/Cod-e-Codes/python-simon-says](https://github.
 ---
 
 **Enjoy challenging your memory with Python Simon Says!**
+
