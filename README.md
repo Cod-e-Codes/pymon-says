@@ -176,7 +176,7 @@ Install them using the provided `requirements.txt` file.
 - [ ] Implement visual button press effects
 - [ ] Develop global leaderboard system
 - [ ] Create custom sound theme support
-- [ ] Cross-platform packaging solutions
+- [x] Cross-platform packaging solutions *(Windows supported; planning to expand to macOS and Linux in future releases)*
 
 ---
 
