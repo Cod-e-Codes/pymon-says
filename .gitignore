@@ -23,3 +23,7 @@ env/
 # System files
 .DS_Store
 Thumbs.db
+
+# Release files
+build/
+dist/
