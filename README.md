@@ -152,10 +152,10 @@ Install them using the provided `requirements.txt` file.
 
 ## Future Improvements
 
-- Add visual effects for button presses.
-- Implement a leaderboard system for global high scores.
-- Create custom sound theme support.
-- Provide cross-platform packaging solutions.
+- [ ] Implement visual button press effects
+- [ ] Develop global leaderboard system
+- [ ] Create custom sound theme support
+- [ ] Cross-platform packaging solutions
 
 ---
 
