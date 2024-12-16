@@ -23,6 +23,7 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 ---
 
 ## Table of Contents
+- [Releases](#releases)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -34,6 +35,23 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+
+---
+
+## Releases
+
+### Latest Release
+
+The latest standalone executable is available for download here:
+[**Simon Says v1.0 - Download Standalone Executable**](https://github.com/Cod-e-Codes/python-simon-says/releases/tag/v1.0)
+
+**For Users:**
+- Download `main.exe` for Windows from the latest release.
+- Run the executable to start playing the game without installing Python or dependencies.
+
+**For Developers:**
+- Download the source code from the same release page.
+- Follow the installation and usage instructions below to run or modify the project.
 
 ---
 
@@ -85,7 +103,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-1. Prepare Sound Files
+### Prepare Sound Files
 
 ```bash
 python sound_gen.py
@@ -93,13 +111,15 @@ python sound_gen.py
 
 This script creates `.wav` files for the game's tones and cleans up temporary voice files after combining them.
 
-2. Launch the Game
+### Launch the Game
 
 ```bash
 python main.py
 ```
 
-3. Enjoy the game! Follow the sequence of flashing buttons and try to beat your high score.
+### Standalone Executable
+
+If you downloaded the `main.exe` file, simply double-click to launch the game.
 
 ---
 
@@ -114,6 +134,7 @@ python-simon-says/
 ├── *.wav                # Generated sound files
 ├── requirements.txt     # Project dependencies
 ├── screenshot.png       # Game interface preview
+├── icon.ico             # Application icon
 └── README.md            # Project documentation
 ```
 

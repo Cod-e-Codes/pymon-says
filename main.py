@@ -20,9 +20,6 @@ SOUNDS = {
     "yellow": os.path.join(BASE_PATH, "yellow.wav"),
 }
 
-# Path to the icon
-ICON_PATH = os.path.join(BASE_PATH, "icon.png")
-
 # Initialize pygame mixer
 pygame.mixer.init()
 sounds = {color: pygame.mixer.Sound(path) for color, path in SOUNDS.items()}
@@ -118,8 +115,9 @@ def update_score_labels():
 root = tk.Tk()
 root.title("Simon Says")
 
-# Set the window icon
-root.iconphoto(True, tk.PhotoImage(file=ICON_PATH))
+# Path to the icon
+ICON_PATH = os.path.join(BASE_PATH, "icon.ico")
+root.iconbitmap(ICON_PATH)  # Set the window icon
 
 # Create status label
 status_label = tk.Label(root, text="Press Start to play!", font=("Arial", 16))
