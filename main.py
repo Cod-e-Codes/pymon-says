@@ -1,18 +1,31 @@
 import tkinter as tk
 import random
 from time import sleep
-import pygame  # Import pygame for sound effects
+import pygame
+import sys
+import os
+
+# Get the base path (compatible with PyInstaller bundling)
+BASE_PATH = getattr(
+    sys,
+    '_MEIPASS',
+    os.path.dirname(os.path.abspath(__file__))
+    )
+
+# Load sounds dynamically from the correct path
+SOUNDS = {
+    "red": os.path.join(BASE_PATH, "red.wav"),
+    "green": os.path.join(BASE_PATH, "green.wav"),
+    "blue": os.path.join(BASE_PATH, "blue.wav"),
+    "yellow": os.path.join(BASE_PATH, "yellow.wav"),
+}
+
+# Path to the icon
+ICON_PATH = os.path.join(BASE_PATH, "icon.png")
 
 # Initialize pygame mixer
 pygame.mixer.init()
-
-# Load sounds for each color
-sounds = {
-    "red": pygame.mixer.Sound("red.wav"),
-    "green": pygame.mixer.Sound("green.wav"),
-    "blue": pygame.mixer.Sound("blue.wav"),
-    "yellow": pygame.mixer.Sound("yellow.wav"),
-}
+sounds = {color: pygame.mixer.Sound(path) for color, path in SOUNDS.items()}
 
 # Initialize variables
 sequence = []
@@ -105,6 +118,9 @@ def update_score_labels():
 root = tk.Tk()
 root.title("Simon Says")
 
+# Set the window icon
+root.iconphoto(True, tk.PhotoImage(file=ICON_PATH))
+
 # Create status label
 status_label = tk.Label(root, text="Press Start to play!", font=("Arial", 16))
 status_label.pack(pady=10)
@@ -127,11 +143,11 @@ for color in colors:
         width=10,
         height=5,
         command=lambda c=color: button_click(c)
-        )
+    )
     btn.grid(
         row=0 if color in ["red", "green"] else 1,
         column=0 if color in ["red", "blue"] else 1
-        )
+    )
     buttons[color] = btn
 
 # Create the Start button
@@ -139,7 +155,7 @@ start_button = tk.Button(
     root, text="Start",
     command=start_game,
     font=("Arial", 14)
-    )
+)
 start_button.pack(pady=10)
 
 root.mainloop()
