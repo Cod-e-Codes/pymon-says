@@ -15,13 +15,24 @@ A modern twist on the classic Simon Says game implemented in Python. This projec
 ---
 
 ## Table of Contents
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Prerequisites](#prerequisites)
 - [File Structure](#file-structure)
 - [How It Works](#how-it-works)
 - [Dependencies](#dependencies)
+- [Screenshot](#screenshot)
 - [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Prerequisites
+
+- **Python 3.8+**: The project is tested on Python 3.12.3 but should work on versions 3.8 and above.
+- **Pip**: Ensure you have pip installed for managing dependencies.
+- **Virtual Environment**: (Recommended) Use a virtual environment to avoid conflicts with other Python projects.
 
 ---
 
@@ -62,14 +73,6 @@ A modern twist on the classic Simon Says game implemented in Python. This projec
    ```
 
 3. Enjoy the game! Follow the sequence of flashing buttons and try to beat your high score.
-
----
-
-## Prerequisites
-
-- **Python 3.8+**: The project is tested on Python 3.12.3 but should work on versions 3.8 and above.
-- **Pip**: Ensure you have pip installed for managing dependencies.
-- **Virtual Environment**: (Recommended) Use a virtual environment to avoid conflicts with other Python projects.
 
 ---
 
@@ -120,18 +123,18 @@ Install them using the provided `requirements.txt` file.
 
 ---
 
+## Screenshot
+
+![Screenshot of the game in action](screenshot.png)
+
+---
+
 ## Future Improvements
 
 - Add visual effects for button presses.
 - Implement a leaderboard system for global high scores.
 - Allow custom sound themes.
 - Provide cross-platform packaging for standalone execution.
-
----
-
-## Screenshot
-
-![Screenshot of the game in action](screenshot.png)
 
 ---
 
@@ -148,3 +151,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Enjoy the game and have fun challenging your memory!
+
