@@ -1,4 +1,4 @@
-# Python Simon Says Game
+# PymonSays: A Memory Game
 
 ## Overview
 
@@ -43,7 +43,7 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 ### Latest Release
 
 The latest standalone executable is available for download here:
-[**Simon Says v1.0 - Download Standalone Executable**](https://github.com/Cod-e-Codes/python-simon-says/releases/tag/v1.0)
+[**Simon Says v1.0 - Download Standalone Executable**](https://github.com/Cod-e-Codes/pymon-says/releases/tag/v1.0)
 
 **For Users:**
 - Download `main.exe` for Windows from the latest release.
@@ -75,8 +75,8 @@ The latest standalone executable is available for download here:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Cod-e-Codes/python-simon-says.git
-cd python-simon-says
+git clone https://github.com/Cod-e-Codes/pymon-says.git
+cd python-pymon-says
 ```
 
 ### 2. Set Up Virtual Environment
@@ -126,7 +126,7 @@ If you downloaded the `main.exe` file, simply double-click to launch the game.
 ## File Structure
 
 ```plaintext
-python-simon-says/
+pymon-says/
 │
 ├── main.py              # Primary game implementation
 ├── sound_gen.py         # Sound generation and management
@@ -148,7 +148,7 @@ python-simon-says/
 - Combines tones and voice prompts into `.wav` files.
 - Cleans up temporary voice files automatically.
 
-### 2. **Simon Says Game** (`main.py`):
+### 2. **Pymon Says Game** (`main.py`):
 - Tkinter-based graphical interface.
 - Dynamic difficulty progression.
 - Real-time score tracking.
@@ -206,9 +206,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Project Link: [https://github.com/Cod-e-Codes/python-simon-says](https://github.com/Cod-e-Codes/python-simon-says)
+Project Link: [https://github.com/Cod-e-Codes/pymon-says](https://github.com/Cod-e-Codes/pymon-says)
 
 ---
 
-**Enjoy challenging your memory with Python Simon Says!**
-
+**Enjoy challenging your memory with Pymon Says!**
