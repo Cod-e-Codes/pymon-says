@@ -1,4 +1,4 @@
-# PymonSays: A Mobile Memory Game
+# PymonSays: A Memory Game
 
 ## Overview
 
