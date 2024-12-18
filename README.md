@@ -31,7 +31,7 @@ PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, 
 - [How It Works](#how-it-works)
 - [Dependencies](#dependencies)
 - [Future Improvements](#future-improvements)
-- [Screenshot](#screenshot)
+- [Screenshots](#screenshots)__coming soon__
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -174,7 +174,7 @@ pip install -r requirements.txt
 
 ---
 
-## Screenshot
+## Screenshots
 
 *Coming soon: A preview of the game interface on mobile!*
 
