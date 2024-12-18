@@ -76,7 +76,7 @@ The latest standalone executable is available for download here:
 
 ```bash
 git clone https://github.com/Cod-e-Codes/pymon-says.git
-cd python-pymon-says
+cd pymon-says
 ```
 
 ### 2. Set Up Virtual Environment
