@@ -40,7 +40,7 @@ PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, 
 
 ## Releases
 
-*Coming soon: Apk file*
+*Coming soon: Downloadable Android `.apk` file*
 <!--
 ### Latest Release
 
