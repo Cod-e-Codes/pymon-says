@@ -1,18 +1,34 @@
-import tkinter as tk
-import random
-from time import sleep
-import pygame
-import sys
+"""
+PymonSays: A Memory Game
+A modern adaptation of the classic Simon Says game with an interactive and colorful UI.
+
+Features:
+- Progressive difficulty scaling
+- High-score tracking
+- Visual and audio feedback
+"""
+
 import os
+import random
+import sys
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.clock import Clock
+import pygame
 
-# Get the base path (compatible with PyInstaller bundling)
-BASE_PATH = getattr(
-    sys,
-    '_MEIPASS',
-    os.path.dirname(os.path.abspath(__file__))
-    )
+# Initialize pygame mixer for audio
+try:
+    pygame.mixer.init()
+except Exception as e:
+    print(f"Error initializing pygame mixer: {e}")
 
-# Load sounds dynamically from the correct path
+# Base path (compatible with PyInstaller bundling)
+BASE_PATH = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+# Load sound files dynamically
 SOUNDS = {
     "red": os.path.join(BASE_PATH, "red.wav"),
     "green": os.path.join(BASE_PATH, "green.wav"),
@@ -20,140 +36,138 @@ SOUNDS = {
     "yellow": os.path.join(BASE_PATH, "yellow.wav"),
 }
 
-# Initialize pygame mixer
-pygame.mixer.init()
-sounds = {color: pygame.mixer.Sound(path) for color, path in SOUNDS.items()}
+# Attempt to load sounds
+try:
+    sounds = {color: pygame.mixer.Sound(path) for color, path in SOUNDS.items()}
+except Exception as e:
+    print(f"Error loading sounds: {e}")
+    sounds = {}
 
-# Initialize variables
-sequence = []
-player_sequence = []
-buttons = {}
-score = 0
-high_score = 0
-base_delay = 0.5  # Base delay for flashing buttons
+class PymonSays(App):
+    def build(self):
+        # Game state variables
+        self.sequence = []
+        self.player_sequence = []
+        self.score = 0
+        self.high_score = 0
+        self.base_delay = 0.5
 
+        # Main layout
+        main_layout = BoxLayout(orientation="vertical", spacing=10)
 
-# Add a delay for showing the sequence and play sound
-def flash_button(color, delay):
-    sounds[color].play()  # Play the corresponding sound
-    buttons[color].config(bg="white")
-    root.update()
-    sleep(delay)
-    buttons[color].config(bg=color)
-    root.update()
-    sleep(0.2)
+        # Labels for game status and scores
+        self.status_label = Label(text="Press Start to play!", font_size=20, size_hint=(1, 0.2))
+        self.score_label = Label(text="Score: 0", font_size=16, size_hint=(1, 0.1))
+        self.high_score_label = Label(text="High Score: 0", font_size=16, size_hint=(1, 0.1))
+        main_layout.add_widget(self.status_label)
+        main_layout.add_widget(self.score_label)
+        main_layout.add_widget(self.high_score_label)
 
+        # Buttons for the game
+        self.buttons = {}
+        colors = ["red", "green", "blue", "yellow"]
+        button_layout = GridLayout(cols=2, spacing=10, size_hint=(1, 0.5))
+        for color in colors:
+            button = Button(
+                background_color=self.get_button_color(color),
+                text="",
+                on_press=lambda instance, c=color: self.button_click(c)
+            )
+            self.buttons[color] = button
+            button_layout.add_widget(button)
+        main_layout.add_widget(button_layout)
 
-# Add a new color to the sequence
-def add_to_sequence():
-    colors = list(buttons.keys())
-    sequence.append(random.choice(colors))
+        # Start button
+        start_button = Button(text="Start", size_hint=(1, 0.1), on_press=self.start_game)
+        main_layout.add_widget(start_button)
 
+        return main_layout
 
-# Play the current sequence
-def play_sequence():
-    # Adjust delay based on score
-    delay = max(0.2, base_delay - (score * 0.02))
-    for color in sequence:
-        flash_button(color, delay)
+    @staticmethod
+    def get_button_color(color):
+        # Returns the appropriate RGBA color for each button
+        color_map = {
+            "red": (1, 0, 0, 1),
+            "green": (0, 1, 0, 1),
+            "blue": (0, 0, 1, 1),
+            "yellow": (1, 1, 0, 1)
+        }
+        return color_map.get(color, (1, 1, 1, 1))
 
+    def flash_button(self, color, delay):
+        # Flash the button and play sound
+        def restore_button(*_):
+            self.buttons[color].background_color = self.get_button_color(color)
 
-# Check player's input
-def check_sequence():
-    global player_sequence, sequence, score, high_score
-    if player_sequence == sequence[:len(player_sequence)]:
-        if len(player_sequence) == len(sequence):
-            score += 1  # Increment score for completing a sequence
-            high_score = max(high_score, score)  # Update high score
-            update_score_labels()
-            status_label.config(text="Correct! Watch the next sequence.")
-            player_sequence = []
-            root.after(1000, next_round)
+        if color in sounds:
+            sounds[color].play()
+        self.buttons[color].background_color = (1, 1, 1, 1)
+        Clock.schedule_once(restore_button, delay)
+
+    def play_sequence(self):
+        # Play the sequence for the player to memorize
+        self.status_label.text = "Watch the sequence!"
+        delay = max(0.2, self.base_delay - (self.score * 0.02))
+        for i, color in enumerate(self.sequence):
+            Clock.schedule_once(lambda dt, c=color: self.flash_button(c, delay), i * (delay + 0.5))
+        Clock.schedule_once(lambda dt: self.player_turn(), len(self.sequence) * (delay + 0.5))
+
+    def add_to_sequence(self):
+        # Add a random color to the sequence
+        colors = list(self.buttons.keys())
+        self.sequence.append(random.choice(colors))
+
+    def player_turn(self):
+        self.status_label.text = "Your turn!"
+
+    def check_sequence(self):
+        # Validate the player's sequence
+        if self.player_sequence == self.sequence[:len(self.player_sequence)]:
+            if len(self.player_sequence) == len(self.sequence):
+                self.score += 1
+                self.high_score = max(self.high_score, self.score)
+                self.update_scores()
+                self.player_sequence = []
+                Clock.schedule_once(lambda dt: self.next_round(), 1)
+            else:
+                self.status_label.text = "Keep going!"
         else:
-            status_label.config(text="Keep going!")
-    else:
-        status_label.config(text="Game Over! Press Start to play again.")
-        player_sequence = []
-        sequence = []
-        score = 0  # Reset score
-        update_score_labels()
+            self.status_label.text = "Game Over! Press Start to play again."
+            self.sequence = []
+            self.player_sequence = []
+            self.score = 0
+            self.update_scores()
+
+    def button_click(self, color):
+        # Handle button clicks by the player
+        if not self.sequence:
+            return
+        self.player_sequence.append(color)
+        self.flash_button(color, 0.2)
+        self.check_sequence()
+
+    def next_round(self):
+        # Proceed to the next round
+        self.add_to_sequence()
+        self.play_sequence()
+
+    def start_game(self, instance):
+        # Start a new game
+        self.sequence = []
+        self.player_sequence = []
+        self.score = 0
+        self.update_scores()
+        self.status_label.text = "Watch the sequence!"
+        self.next_round()
+
+    def update_scores(self):
+        # Update score and high score labels
+        self.score_label.text = f"Score: {self.score}"
+        self.high_score_label.text = f"High Score: {self.high_score}"
 
 
-# Start a new round
-def next_round():
-    add_to_sequence()
-    play_sequence()
-    status_label.config(text="Your turn!")
-
-
-# Handle button clicks
-def button_click(color):
-    global player_sequence
-    player_sequence.append(color)
-    flash_button(color, 0.2)  # Fixed delay for player clicks
-    check_sequence()
-
-
-# Start game
-def start_game():
-    global sequence, player_sequence, score
-    sequence = []
-    player_sequence = []
-    score = 0  # Reset score at the start
-    update_score_labels()
-    status_label.config(text="Watch the sequence!")
-    next_round()
-
-
-# Update the score and high score labels
-def update_score_labels():
-    score_label.config(text=f"Score: {score}")
-    high_score_label.config(text=f"High Score: {high_score}")
-
-
-# Create the GUI
-root = tk.Tk()
-root.title("Simon Says")
-
-# Path to the icon
-ICON_PATH = os.path.join(BASE_PATH, "icon.ico")
-root.iconbitmap(ICON_PATH)  # Set the window icon
-
-# Create status label
-status_label = tk.Label(root, text="Press Start to play!", font=("Arial", 16))
-status_label.pack(pady=10)
-
-# Create score and high score labels
-score_label = tk.Label(root, text="Score: 0", font=("Arial", 14))
-score_label.pack()
-high_score_label = tk.Label(root, text="High Score: 0", font=("Arial", 14))
-high_score_label.pack()
-
-# Create the buttons
-frame = tk.Frame(root)
-frame.pack()
-
-colors = ["red", "green", "blue", "yellow"]
-for color in colors:
-    btn = tk.Button(
-        frame,
-        bg=color,
-        width=10,
-        height=5,
-        command=lambda c=color: button_click(c)
-    )
-    btn.grid(
-        row=0 if color in ["red", "green"] else 1,
-        column=0 if color in ["red", "blue"] else 1
-    )
-    buttons[color] = btn
-
-# Create the Start button
-start_button = tk.Button(
-    root, text="Start",
-    command=start_game,
-    font=("Arial", 14)
-)
-start_button.pack(pady=10)
-
-root.mainloop()
+if __name__ == '__main__':
+    try:
+        PymonSays().run()
+    except Exception as e:
+        print(f"An error occurred: {e}")
