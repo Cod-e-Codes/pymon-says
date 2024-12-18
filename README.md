@@ -1,24 +1,24 @@
-# Python Simon Says Game
+# PymonSays: A Mobile Memory Game
 
 ## Overview
 
-A modern, interactive implementation of the classic Simon Says memory game, featuring a responsive graphical user interface, dynamic sound effects, and engaging voice guidance.
+PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, built with **Kivy**. It features an interactive user interface, dynamic audio feedback, and progressive difficulty scaling for an engaging gameplay experience on Android.
 
 ---
 
 ## Key Features
 
-- **Interactive Gameplay**: Responsive GUI with a classic Simon Says game mechanic
-- **Dynamic Audio Experience**:
-  - Unique tones for each game button
-  - Voice-guided color announcements
+- **Interactive Gameplay**: A colorful and responsive UI designed for touch-based devices.
+- **Dynamic Audio Feedback**:
+  - Unique tones for each button.
+  - Voice-guided color prompts for immersive feedback.
 - **Advanced Game Mechanics**:
-  - Comprehensive scoring system
-  - Progressive difficulty scaling
-  - High score tracking
-- **Optimized User Experience**:
-  - Clean, automated sound file management
-  - Intuitive user interface
+  - Real-time score tracking.
+  - Progressive difficulty scaling for a challenge.
+  - High-score preservation.
+- **Optimized Mobile Experience**:
+  - Compatible with Android devices.
+  - Lightweight and efficient, built with Kivy.
 
 ---
 
@@ -42,100 +42,93 @@ A modern, interactive implementation of the classic Simon Says memory game, feat
 
 ### Latest Release
 
-The latest standalone executable is available for download here:
-[**Simon Says v1.0 - Download Standalone Executable**](https://github.com/Cod-e-Codes/python-simon-says/releases/tag/v1.0)
+The latest APK file is available for download here:  
+[**PymonSays v1.0 - Download APK**](https://github.com/Cod-e-Codes/python-simon-says/releases/tag/mobile-v1.0)
 
-**For Users:**
-- Download `main.exe` for Windows from the latest release.
-- Run the executable to start playing the game without installing Python or dependencies.
+- **For Users**:  
+  Download the `PymonSays.apk` file, transfer it to your Android device, and install it to start playing.
 
-**For Developers:**
-- Download the source code from the same release page.
-- Follow the installation and usage instructions below to run or modify the project.
+- **For Developers**:  
+  Download the source code from the repository’s `mobile` branch. Follow the instructions below to run or modify the project.
 
 ---
 
 ## Prerequisites
 
 ### System Requirements
-
-- **Python Version**: 3.8+ (Tested on 3.12.3)
-- **Platform**: Windows, macOS, Linux
-
-### Development Tools
-
-- Python
-- pip
-- (Recommended) Virtual environment
+- **Platform**: Android
+- **Python Version**: 3.8+ (for development and debugging)
+- **Development Environment**:
+  - **Kivy**: Cross-platform Python framework for GUI applications.
+  - **Buildozer**: For packaging the app into an APK.
 
 ---
 
 ## Installation
 
 ### 1. Clone the Repository
-
 ```bash
 git clone https://github.com/Cod-e-Codes/python-simon-says.git
 cd python-simon-says
+git checkout mobile
 ```
 
-### 2. Set Up Virtual Environment
-
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# macOS/Linux
-source venv/bin/activate
-
-# Windows
-.\venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
+
+### 3. Generate Sound Files (Optional)
+Run the `sound_gen.py` script to regenerate the `.wav` sound files:
+```bash
+python sound_gen.py
+```
+
+### 4. Package the APK
+Use Buildozer to package the app for Android:
+```bash
+buildozer -v android debug
+```
+
+The resulting APK will be located in the `bin/` directory.
 
 ---
 
 ## Usage
 
-### Prepare Sound Files
+### On Android
+- Install the APK on your Android device.
+- Launch the app and follow the on-screen instructions.
 
-```bash
-python sound_gen.py
-```
-
-This script creates `.wav` files for the game's tones and cleans up temporary voice files after combining them.
-
-### Launch the Game
-
+### For Testing Locally
+To test the app on your PC, run the following:
 ```bash
 python main.py
 ```
 
-### Standalone Executable
-
-If you downloaded the `main.exe` file, simply double-click to launch the game.
+Ensure all sound files (`.wav`) are present in the same directory as `main.py`.
 
 ---
 
 ## File Structure
 
 ```plaintext
-python-simon-says/
+pymonsays/
 │
-├── main.py              # Primary game implementation
+├── main.py              # Main game implementation (Kivy)
 ├── sound_gen.py         # Sound generation and management
-│
-├── *.wav                # Generated sound files
 ├── requirements.txt     # Project dependencies
-├── screenshot.png       # Game interface preview
-├── icon.ico             # Application icon
-└── README.md            # Project documentation
+├── buildozer.spec       # Configuration for packaging the APK
+│
+├── sounds/              # Directory containing generated sound files
+│   ├── red.wav
+│   ├── green.wav
+│   ├── blue.wav
+│   └── yellow.wav
+│
+├── icon.png             # Application icon
+├── README.md            # Project documentation
+└── LICENSE              # License file
 ```
 
 ---
@@ -143,16 +136,14 @@ python-simon-says/
 ## How It Works
 
 ### 1. **Sound Generation** (`sound_gen.py`):
-- Generates tones for the four colors using `pydub`.
-- Leverages `pyttsx3` for voice synthesis.
-- Combines tones and voice prompts into `.wav` files.
-- Cleans up temporary voice files automatically.
+- Uses `pydub` to create pure sine wave tones.
+- Synthesizes voice prompts with `pyttsx3`.
+- Combines tones and voice prompts into `.wav` files for use in the game.
 
-### 2. **Simon Says Game** (`main.py`):
-- Tkinter-based graphical interface.
-- Dynamic difficulty progression.
-- Real-time score tracking.
-- High score preservation.
+### 2. **PymonSays Game** (`main.py`):
+- Built with **Kivy** for cross-platform support.
+- Dynamic UI with responsive buttons and visual feedback.
+- Progressive difficulty scaling and high-score tracking.
 
 ---
 
@@ -160,29 +151,32 @@ python-simon-says/
 
 | Library       | Version       | Purpose                        |
 |---------------|---------------|--------------------------------|
-| comtypes      | >=1.4.8,<2.0  | Windows COM interface          |
+| kivy          | >=2.0,<3.0    | Cross-platform GUI framework   |
+| comtypes      | >=1.4.8,<2.0  | Windows COM interface (optional) |
 | pydub         | >=0.25.1,<1.0 | Audio manipulation             |
 | pygame        | >=2.6.1,<3.0  | Audio playback                 |
-| pypiwin32     | >=223,<224    | Windows Python extensions      |
 | pyttsx3       | >=2.98,<3.0   | Text-to-speech synthesis       |
 | pywin32       | >=308,<309    | Windows Python extensions      |
 
-Install them using the provided `requirements.txt` file.
+Install dependencies using:
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
 ## Future Improvements
 
-- [ ] Implement visual button press effects
-- [ ] Develop global leaderboard system
-- [ ] Create custom sound theme support
-- [x] Cross-platform packaging solutions *(Windows supported; planning to expand to macOS and Linux in future releases)*
+- [ ] Add multiplayer mode for competitive play.
+- [ ] Optimize performance for low-end Android devices.
+- [ ] Add global leaderboards for score tracking.
+- [ ] Customize sound themes for buttons and voices.
 
 ---
 
 ## Screenshot
 
-![Screenshot of the game in action](screenshot.png)
+*Coming soon: A preview of the game interface on mobile!*
 
 ---
 
@@ -190,11 +184,11 @@ Install them using the provided `requirements.txt` file.
 
 Contributions are welcome! Please follow these steps:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
 ---
 
@@ -206,9 +200,13 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
+For questions or feedback, contact:
+
+- **Cody Marsengill**  
+  Email: contact@cod-e-codes.com  
+
 Project Link: [https://github.com/Cod-e-Codes/python-simon-says](https://github.com/Cod-e-Codes/python-simon-says)
 
 ---
 
-**Enjoy challenging your memory with Python Simon Says!**
-
+**Enjoy challenging your memory with PymonSays!**
