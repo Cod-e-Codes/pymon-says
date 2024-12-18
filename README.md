@@ -47,7 +47,7 @@ PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, 
 ### Latest Release
 
 The latest APK file is available for download here:  
-[**PymonSays v1.0 - Download APK**](https://github.com/Cod-e-Codes/python-simon-says/releases/tag/mobile-v1.0)
+[**PymonSays v1.0 - Download APK**](https://github.com/Cod-e-Codes/pymon-says/releases/tag/mobile-v1.0)
 
 - **For Users**:  
   Download the `PymonSays.apk` file, transfer it to your Android device, and install it to start playing.
@@ -72,8 +72,8 @@ The latest APK file is available for download here:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Cod-e-Codes/python-simon-says.git
-cd python-simon-says
+git clone https://github.com/Cod-e-Codes/pymon-says.git
+cd pymon-says
 git checkout mobile
 ```
 
@@ -209,7 +209,7 @@ For questions or feedback, contact:
 - **Cody Marsengill**  
   Email: contact@cod-e-codes.com  
 
-Project Link: [https://github.com/Cod-e-Codes/python-simon-says](https://github.com/Cod-e-Codes/python-simon-says)
+Project Link: [https://github.com/Cod-e-Codes/pymon-says](https://github.com/Cod-e-Codes/pymon-says)
 
 ---
 
