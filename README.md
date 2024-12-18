@@ -23,7 +23,7 @@ PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, 
 ---
 
 ## Table of Contents
-<!--- [Releases](#releases)-->
+- [Releases](#releases) *coming soon*
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -31,15 +31,17 @@ PymonSays is a modern, mobile adaptation of the classic Simon Says memory game, 
 - [How It Works](#how-it-works)
 - [Dependencies](#dependencies)
 - [Future Improvements](#future-improvements)
-- [Screenshots](#screenshots)__coming soon__
+- [Screenshots](#screenshots) *coming soon*
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
 ---
 
-<!--## Releases
+## Releases
 
+### *Coming soon: Apk file*
+<!--
 ### Latest Release
 
 The latest APK file is available for download here:  
@@ -176,7 +178,7 @@ pip install -r requirements.txt
 
 ## Screenshots
 
-*Coming soon: A preview of the game interface on mobile!*
+### *Coming soon: A preview of the game interface on mobile!*
 
 ---
 
