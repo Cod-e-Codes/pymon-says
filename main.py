@@ -113,7 +113,7 @@ def update_score_labels():
 
 # Create the GUI
 root = tk.Tk()
-root.title("Simon Says")
+root.title("Pymon Says")
 
 # Path to the icon
 ICON_PATH = os.path.join(BASE_PATH, "icon.ico")
